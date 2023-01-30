@@ -1,9 +1,11 @@
 @import "../../styles/mixins.scss";
 
 .content {
-	@include container;
-
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+
+	@media screen and (max-width: $breakpoint-sm) {
+		padding: 0;
+	}
 }
