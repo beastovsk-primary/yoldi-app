@@ -1,6 +1,19 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.scss";
+import { Inter } from "@next/font/google";
+import { ConfigProvider } from "antd";
+import type { AppProps } from "next/app";
+
+const inter = Inter({
+	subsets: ["latin", "cyrillic"],
+	weight: ["400", "500"],
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+	return (
+		<ConfigProvider>
+			<main className={inter.className}>
+				<Component {...pageProps} />
+			</main>
+		</ConfigProvider>
+	);
 }
