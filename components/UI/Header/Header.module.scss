@@ -1,7 +1,35 @@
 @import "../../../styles/mixins.scss";
 
 .container {
+	padding: 15px 20px;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	background: $basic-white;
+	border-bottom: 1px solid #e6e6e6;
+}
+.wrapper {
+	display: flex;
+	align-items: center;
+}
+.info {
+	@include fluid(font-size, 16px, 18px);
+	margin-left: 20px;
+	font-weight: normal;
+}
+.button {
+	padding: 7px 33px;
+	background: $basic-white;
+	border: 1px solid #d4d4d4;
+	border-radius: 5px;
+
+	color: $basic-black;
+
+	&:hover {
+		background: #ccc;
+		color: $basic-white;
+		transition: $trn;
+	}
 }
