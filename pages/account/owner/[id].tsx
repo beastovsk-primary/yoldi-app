@@ -1,9 +1,9 @@
 import Layout from "@/components/Layout/Layout";
 
-export default function Home() {
+export default function Owner() {
 	return (
 		<Layout>
-			<div>dsfds</div>
+			<div>Personal Cabinet</div>
 		</Layout>
 	);
 }

@@ -1,6 +1,8 @@
 import { postRequest } from "@/pages/api/swr";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
+import useCookie from "react-use-cookie";
 import useSWRMutation from "swr/mutation";
 
 import eyeSolid from "../../public/icons/input/eye-solid.svg";
@@ -9,16 +11,20 @@ import s from "./AuthForm.module.scss";
 
 interface AuthFormProps {}
 
-const link = "https://frontend-test-api.yoldi.agency";
-
 const AuthForm: FC<AuthFormProps> = (props) => {
+	const [token, updateToken] = useCookie("key");
+	const router = useRouter();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const [toggleType, setToggleType] = useState("password");
 	const [isAvailable, setIsAvailable] = useState(false);
 
-	const { trigger } = useSWRMutation(`${link}/api/auth/login`, postRequest);
+	const { trigger } = useSWRMutation(
+		"https://frontend-test-api.yoldi.agency/api/auth/login",
+		postRequest
+	);
 
 	const togglePasswordType = () => {
 		if (toggleType == "password") return setToggleType("text");
@@ -36,10 +42,13 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 	};
 
 	const onFinish = async () => {
-		await trigger({
+		const auth = await trigger({
 			email,
 			password,
 		});
+
+		updateToken(auth.value);
+		router.push(`/account/owner/${auth.value}`);
 	};
 
 	useEffect(() => {

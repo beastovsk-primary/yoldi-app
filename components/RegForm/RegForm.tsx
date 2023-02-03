@@ -1,6 +1,8 @@
 import { postRequest } from "@/pages/api/swr";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
+import useCookie from "react-use-cookie";
 import useSWRMutation from "swr/mutation";
 
 import eyeSolid from "../../public/icons/input/eye-solid.svg";
@@ -9,9 +11,10 @@ import s from "./RegForm.module.scss";
 
 interface RegFormProps {}
 
-const link = "https://frontend-test-api.yoldi.agency";
-
 const RegForm: FC<RegFormProps> = (props) => {
+	const [token, updateToken] = useCookie("key");
+	const router = useRouter();
+
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -19,7 +22,10 @@ const RegForm: FC<RegFormProps> = (props) => {
 	const [toggleType, setToggleType] = useState("password");
 	const [isAvailable, setIsAvailable] = useState(false);
 
-	const { trigger } = useSWRMutation(`${link}/api/auth/sign-up`, postRequest);
+	const { trigger } = useSWRMutation(
+		"https://frontend-test-api.yoldi.agency/api/auth/sign-up",
+		postRequest
+	);
 
 	const togglePasswordType = () => {
 		if (toggleType == "password") return setToggleType("text");
@@ -38,7 +44,10 @@ const RegForm: FC<RegFormProps> = (props) => {
 	};
 
 	const onFinish = async () => {
-		await trigger({ name, email, password });
+		const reg = await trigger({ name, email, password });
+
+		updateToken(reg.value);
+		router.push(`/account/owner/${reg.value}`);
 	};
 
 	useEffect(() => {

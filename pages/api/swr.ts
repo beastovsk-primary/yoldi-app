@@ -8,5 +8,9 @@ export async function postRequest(
 	return fetch(url, {
 		method: "POST",
 		body: JSON.stringify(arg),
-	});
+		headers: {
+			accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	}).then((res) => res.json());
 }

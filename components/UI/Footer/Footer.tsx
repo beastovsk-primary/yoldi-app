@@ -18,14 +18,14 @@ const Footer: FC<FooterProps> = () => {
 		if (router.pathname == "/reg") {
 			return setPageInfo({
 				info: "Уже есть аккаунт?",
-				href: "/auth",
+				href: "/login",
 				link: "Войти",
 			});
 		}
 
 		setPageInfo({
 			info: "Еще нет аккаунта?",
-			href: "/reg",
+			href: "/register",
 			link: "Зарегистрироваться",
 		});
 	};

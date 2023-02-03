@@ -28,7 +28,7 @@ const Header: FC<HeaderProps> = () => {
 				) : null}
 			</div>
 
-			<Link href="/auth" className={s.button}>
+			<Link href="/login" className={s.button}>
 				Войти
 			</Link>
 		</div>
