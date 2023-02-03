@@ -1,5 +1,5 @@
 export interface IRegData {
-	mail: string;
-	name: string;
+	email: string;
+	name?: string;
 	password: string;
 }
