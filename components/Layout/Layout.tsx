@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useEffect } from "react";
 import Footer from "../UI/Footer/Footer";
 import Header from "../UI/Header/Header";
 
@@ -15,11 +15,16 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
 	const [token] = useCookie("key");
+	const [slug, updateSlug] = useCookie("slug");
 
-	const { data, error, isLoading } = useSWR(
+	const { data: profile } = useSWR(
 		{ url: `https://frontend-test-api.yoldi.agency/api/profile`, token },
 		getProfileInfo
 	);
+
+	useEffect(() => {
+		updateSlug(profile?.slug);
+	}, [profile]);
 
 	return (
 		<>
@@ -36,9 +41,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className={"page"}>
-				<Header user={!data?.message ? data : null} />
+				<Header user={!profile?.message ? profile : null} />
 				<div className={s.content}>{children}</div>
-				<Footer user={!data?.message ? data : null} />
+				<Footer user={!profile?.message ? profile : null} />
 			</div>
 		</>
 	);

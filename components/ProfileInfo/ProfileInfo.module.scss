@@ -1,8 +1,6 @@
 @import "../../styles/mixins.scss";
 
 .container {
-	@include container;
-
 	padding: 0;
 	display: flex;
 	flex-direction: column;
@@ -13,4 +11,70 @@
 	width: 100%;
 	height: 200px;
 	background: $basic-grey;
+}
+
+.info {
+	@include container;
+
+	display: flex;
+	margin: 0 auto;
+	flex-direction: column;
+	width: 70%;
+
+	@media screen and (max-width: $breakpoint-md) {
+		width: 100%;
+	}
+}
+
+.photo {
+	@include fluid(margin-left, 10px, 20px);
+	@include fluid(margin-bottom, 30px, 40px);
+	@include fluid(width, 100px, 120px);
+	@include fluid(height, 100px, 120px);
+	@include fluid(font-size, 28px, 36px);
+
+	background: $basic-grey;
+	color: $basic-black;
+
+	margin-top: -50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+	border: 1px solid #e6e6e6;
+}
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+
+	@media screen and (max-width: $breakpoint-md) {
+		flex-direction: column;
+	}
+}
+.name {
+	@include fluid(font-size, 28px, 36px);
+	@include fluid(margin-bottom, 10px, 15px);
+	font-weight: 500;
+}
+.mail {
+	color: #838383;
+}
+.edit {
+	@include fluid(font-size, 16px, 22px);
+	color: $basic-black;
+
+	border: 1px solid $background-grey;
+	border-radius: 5px;
+	padding: 7px 22px 7px 55px;
+	background: url("../../public/icons/button/pen.svg") no-repeat 22px;
+	cursor: pointer;
+
+	&:hover {
+		border: 1px solid $hover-grey;
+		transition: $trn;
+	}
+	@media screen and (max-width: $breakpoint-md) {
+		margin-top: 10px;
+	}
 }

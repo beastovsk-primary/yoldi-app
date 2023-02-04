@@ -15,7 +15,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ user }) => {
 	// Library for screen width, SSR support
-	const [token] = reactUseCookie("key");
+	const [slug] = reactUseCookie("slug");
 	const isMobile = useMedia({ maxWidth: "768px" }, true);
 
 	return (
@@ -36,7 +36,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
 			{user ? (
 				<div className={s.user}>
 					<p>{user.name}</p>
-					<Link href={`/account/owner/${token}`}>
+					<Link href={`/account/owner/${slug}`}>
 						<div className={s.photo}>
 							{user.image ? (
 								<Image src={user.image} alt="photo" />

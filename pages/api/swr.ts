@@ -29,3 +29,17 @@ export async function getProfileInfo({
 		},
 	}).then((res) => res.json());
 }
+export async function getUserInfo({
+	url,
+	slag,
+}: {
+	url: string;
+	slag: string;
+}) {
+	return fetch(`${url}/${slag}`, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+		},
+	}).then((res) => res.json());
+}

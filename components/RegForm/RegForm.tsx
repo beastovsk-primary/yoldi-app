@@ -13,6 +13,7 @@ interface RegFormProps {}
 
 const RegForm: FC<RegFormProps> = (props) => {
 	const [token, updateToken] = useCookie("key");
+	const [slug] = useCookie("slug");
 	const router = useRouter();
 
 	const [name, setName] = useState("");
@@ -47,7 +48,7 @@ const RegForm: FC<RegFormProps> = (props) => {
 		const reg = await trigger({ name, email, password });
 
 		updateToken(reg.value);
-		router.push(`/account/owner/${reg.value}`);
+		router.push(`/account/owner/${slug}`);
 	};
 
 	useEffect(() => {

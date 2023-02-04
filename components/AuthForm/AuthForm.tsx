@@ -13,6 +13,7 @@ interface AuthFormProps {}
 
 const AuthForm: FC<AuthFormProps> = (props) => {
 	const [token, updateToken] = useCookie("key");
+	const [slug] = useCookie("slug");
 	const router = useRouter();
 
 	const [email, setEmail] = useState("");
@@ -48,7 +49,7 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 		});
 
 		updateToken(auth.value);
-		router.push(`/account/owner/${auth.value}`);
+		router.push(`/account/owner/${slug}`);
 	};
 
 	useEffect(() => {
