@@ -1,11 +1,14 @@
+import { IUser } from "@/models/IUser";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 import s from "./Footer.module.scss";
 
-interface FooterProps {}
+interface FooterProps {
+	user: IUser;
+}
 
-const Footer: FC<FooterProps> = () => {
+const Footer: FC<FooterProps> = ({ user }) => {
 	const router = useRouter();
 	const [pageInfo, setPageInfo] = useState({ info: "", href: "", link: "" });
 
@@ -15,7 +18,7 @@ const Footer: FC<FooterProps> = () => {
 	const checkCurrentPage = () => {
 		if (!router.pathname) return;
 
-		if (router.pathname == "/reg") {
+		if (router.pathname == "/register") {
 			return setPageInfo({
 				info: "Уже есть аккаунт?",
 				href: "/login",
@@ -33,6 +36,8 @@ const Footer: FC<FooterProps> = () => {
 	useEffect(() => {
 		checkCurrentPage();
 	}, []);
+
+	if (user) return <div></div>;
 
 	return (
 		<div className={s.container}>

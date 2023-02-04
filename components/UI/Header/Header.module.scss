@@ -33,3 +33,21 @@
 		transition: $trn;
 	}
 }
+.user {
+	display: flex;
+	align-items: center;
+}
+.photo {
+	@include fluid(margin-left, 10px, 20px);
+	@include fluid(width, 50px, 80px);
+	@include fluid(height, 50px, 80px);
+
+	background: $basic-grey;
+	color: $basic-black;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+	border: 1px solid #e6e6e6;
+}

@@ -3,3 +3,12 @@ export interface IRegData {
 	name?: string;
 	password: string;
 }
+
+export interface IUser {
+	name: string;
+	email: string;
+	slug: string;
+	image?: any;
+	cover?: any;
+	description?: any;
+}

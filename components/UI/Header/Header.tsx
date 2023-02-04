@@ -6,11 +6,16 @@ import s from "./Header.module.scss";
 import useMedia from "use-media";
 
 import logoImage from "../../../public/header/logo.svg";
+import { IUser } from "@/models/IUser";
+import reactUseCookie from "react-use-cookie";
 
-interface HeaderProps {}
+interface HeaderProps {
+	user: IUser;
+}
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = ({ user }) => {
 	// Library for screen width, SSR support
+	const [token] = reactUseCookie("key");
 	const isMobile = useMedia({ maxWidth: "768px" }, true);
 
 	return (
@@ -28,9 +33,24 @@ const Header: FC<HeaderProps> = () => {
 				) : null}
 			</div>
 
-			<Link href="/login" className={s.button}>
-				Войти
-			</Link>
+			{user ? (
+				<div className={s.user}>
+					<p>{user.name}</p>
+					<Link href={`/account/owner/${token}`}>
+						<div className={s.photo}>
+							{user.image ? (
+								<Image src={user.image} alt="photo" />
+							) : (
+								user.name[0]
+							)}
+						</div>
+					</Link>
+				</div>
+			) : (
+				<Link href="/login" className={s.button}>
+					Войти
+				</Link>
+			)}
 		</div>
 	);
 };

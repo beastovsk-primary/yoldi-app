@@ -14,3 +14,18 @@ export async function postRequest(
 		},
 	}).then((res) => res.json());
 }
+export async function getProfileInfo({
+	url,
+	token,
+}: {
+	url: string;
+	token: string;
+}) {
+	return fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			"X-API-KEY": token,
+		},
+	}).then((res) => res.json());
+}
