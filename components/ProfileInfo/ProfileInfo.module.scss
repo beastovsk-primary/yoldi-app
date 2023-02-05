@@ -40,8 +40,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 100px;
+	border-radius: 50px;
 	border: 1px solid #e6e6e6;
+}
+.image {
+	@include fluid(width, 100px, 120px);
+	@include fluid(height, 100px, 120px);
+	object-fit: cover;
+	object-position: right top;
+	border-radius: 50px;
 }
 .title {
 	display: flex;
@@ -77,4 +84,35 @@
 	@media screen and (max-width: $breakpoint-md) {
 		margin-top: 10px;
 	}
+}
+.body {
+	@include fluid(margin-top, 30px, 40px);
+	@include fluid(margin-bottom, 30px, 40px);
+}
+.description {
+	@include fluid(font-size, 16px, 18px);
+	min-height: 20vh;
+}
+.signout {
+	@include fluid(margin-top, 60px, 70px);
+	@include fluid(font-size, 16px, 22px);
+	color: $basic-black;
+
+	border: 1px solid $background-grey;
+	border-radius: 5px;
+	padding: 7px 22px 7px 57px;
+	background: url("../../public/icons/button/sign-out.svg") no-repeat 22px 3px;
+	cursor: pointer;
+
+	&:hover {
+		border: 1px solid $hover-grey;
+		transition: $trn;
+	}
+	@media screen and (max-width: $breakpoint-md) {
+		margin-top: 10px;
+	}
+}
+.empty {
+	color: #838383;
+	min-height: 20vh;
 }

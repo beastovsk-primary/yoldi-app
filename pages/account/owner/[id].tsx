@@ -7,7 +7,7 @@ import useSWR from "swr";
 
 export default function Owner() {
 	const [token] = reactUseCookie("key");
-	
+
 	const { data: profile } = useSWR(
 		{ url: `https://frontend-test-api.yoldi.agency/api/profile`, token },
 		getProfileInfo
