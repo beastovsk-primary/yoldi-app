@@ -25,7 +25,6 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user }) => {
 
 	const onSignOut = () => {
 		router.push("/login");
-		deleteSlug();
 		deleteKey();
 	};
 	if (!user) return <></>;

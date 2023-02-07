@@ -48,7 +48,7 @@ const RegForm: FC<RegFormProps> = (props) => {
 		const reg = await trigger({ name, email, password });
 
 		updateToken(reg.value);
-		router.push(`/account/owner/${slug}`);
+		router.push(`/account/owner/1`);
 	};
 
 	useEffect(() => {

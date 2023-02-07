@@ -4,6 +4,7 @@ import s from "./EditProfileInfo.module.scss";
 import useSWRMutation from "swr/mutation";
 import { editUserInfo } from "@/pages/api/swr";
 import { useCookie } from "react-use";
+import { useRouter } from "next/router";
 
 interface EditProfileInfoProps {
 	setEditModal: (arg0: boolean) => void;
@@ -15,6 +16,8 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 	userInfo,
 }) => {
 	const [token] = useCookie("key");
+	const router = useRouter();
+	const [slugCookie, updateSlugCookie] = useCookie("slug");
 
 	const [name, setName] = useState(userInfo.name || "");
 	const [slug, setSlug] = useState(userInfo.slug || "");
@@ -28,7 +31,7 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 		editUserInfo
 	);
 
-	const onEditProfile = async () => {
+	const onEdit = async () => {
 		const data = {
 			name,
 			imageId: null,
@@ -36,9 +39,19 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 			coverId: null,
 			description,
 		};
-
 		trigger(data);
+
+		updateSlugCookie(slug);
+
 		setEditModal(false);
+	};
+
+	const onCancel = () => {
+		setEditModal(false);
+
+		setName(userInfo.name || "");
+		setSlug(userInfo.slug || "");
+		setDescription(userInfo.description || "");
 	};
 
 	return (
@@ -76,13 +89,10 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 			</div>
 
 			<div className={s.buttons}>
-				<button
-					className={s.cancel}
-					onClick={() => setEditModal(false)}
-				>
+				<button className={s.cancel} onClick={() => onCancel()}>
 					Отмена
 				</button>
-				<button className={s.save} onClick={() => onEditProfile()}>
+				<button className={s.save} onClick={() => onEdit()}>
 					Сохранить
 				</button>
 			</div>

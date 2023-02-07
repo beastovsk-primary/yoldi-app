@@ -16,7 +16,6 @@ export interface IUser {
 export interface IEditUser {
 	name: string;
 	imageId: string | null;
-	password: string;
 	slug: string;
 	coverId: string | null;
 	description: string;
