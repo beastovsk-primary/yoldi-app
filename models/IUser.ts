@@ -12,3 +12,12 @@ export interface IUser {
 	cover?: any;
 	description?: any;
 }
+
+export interface IEditUser {
+	name: string;
+	imageId: string | null;
+	password: string;
+	slug: string;
+	coverId: string | null;
+	description: string;
+}

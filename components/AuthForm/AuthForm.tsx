@@ -2,7 +2,7 @@ import { postRequest } from "@/pages/api/swr";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import useCookie from "react-use-cookie";
+import { useCookie } from "react-use";
 import useSWRMutation from "swr/mutation";
 
 import eyeSolid from "../../public/icons/input/eye-solid.svg";
@@ -12,7 +12,7 @@ import s from "./AuthForm.module.scss";
 interface AuthFormProps {}
 
 const AuthForm: FC<AuthFormProps> = (props) => {
-	const [token, updateToken] = useCookie("key");
+	const [key, updateKey] = useCookie("key");
 	const [slug] = useCookie("slug");
 	const router = useRouter();
 
@@ -48,8 +48,8 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 			password,
 		});
 
-		updateToken(auth.value);
-		router.push(`/account/owner/${slug}`);
+		updateKey(auth.value);
+		router.push(`/account/owner/${auth.value}`);
 	};
 
 	useEffect(() => {

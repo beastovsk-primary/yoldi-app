@@ -7,7 +7,7 @@ import useMedia from "use-media";
 
 import logoImage from "../../../public/header/logo.svg";
 import { IUser } from "@/models/IUser";
-import reactUseCookie from "react-use-cookie";
+import { useCookie } from "react-use";
 
 interface HeaderProps {
 	user: IUser;
@@ -15,7 +15,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ user }) => {
 	// Library for screen width, SSR support
-	const [slug] = reactUseCookie("slug");
+	const [slug] = useCookie("slug");
 	const isMobile = useMedia({ maxWidth: "768px" }, true);
 
 	return (

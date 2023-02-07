@@ -1,0 +1,93 @@
+import { IUser } from "@/models/IUser";
+import React, { FC, useState } from "react";
+import s from "./EditProfileInfo.module.scss";
+import useSWRMutation from "swr/mutation";
+import { editUserInfo } from "@/pages/api/swr";
+import { useCookie } from "react-use";
+
+interface EditProfileInfoProps {
+	setEditModal: (arg0: boolean) => void;
+	userInfo: IUser;
+}
+
+const EditProfileInfo: FC<EditProfileInfoProps> = ({
+	setEditModal,
+	userInfo,
+}) => {
+	const [token] = useCookie("key");
+
+	const [name, setName] = useState(userInfo.name || "");
+	const [slug, setSlug] = useState(userInfo.slug || "");
+	const [description, setDescription] = useState(userInfo.description || "");
+
+	const { trigger } = useSWRMutation(
+		{
+			url: "https://frontend-test-api.yoldi.agency/api/profile",
+			token,
+		},
+		editUserInfo
+	);
+
+	const onEditProfile = async () => {
+		const data = {
+			name,
+			imageId: null,
+			slug,
+			coverId: null,
+			description,
+		};
+
+		trigger(data);
+		setEditModal(false);
+	};
+
+	return (
+		<div className={s.container}>
+			<h2 className={s.title}>Редактировать профиль</h2>
+
+			<div className={s.field}>
+				<p className={s.label}>Имя</p>
+				<input
+					className={s.input}
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+			</div>
+
+			<div className={s.field}>
+				<p className={s.label}>Адрес профиля</p>
+				<div className={s.adressField}>
+					<div className={s.domain}>examle.com/</div>
+					<input
+						className={`${s.domainInput} ${s.input}`}
+						value={slug}
+						onChange={(e) => setSlug(e.target.value)}
+					/>
+				</div>
+			</div>
+
+			<div className={s.field}>
+				<p className={s.label}>Описание</p>
+				<textarea
+					className={`${s.textarea} ${s.input}`}
+					value={description}
+					onChange={(e) => setDescription(e.target.value)}
+				/>
+			</div>
+
+			<div className={s.buttons}>
+				<button
+					className={s.cancel}
+					onClick={() => setEditModal(false)}
+				>
+					Отмена
+				</button>
+				<button className={s.save} onClick={() => onEditProfile()}>
+					Сохранить
+				</button>
+			</div>
+		</div>
+	);
+};
+
+export default EditProfileInfo;

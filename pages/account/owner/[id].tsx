@@ -1,15 +1,18 @@
 import Layout from "@/components/Layout/Layout";
 import ProfileInfo from "@/components/ProfileInfo/ProfileInfo";
 import { getProfileInfo } from "@/pages/api/swr";
-import reactUseCookie from "react-use-cookie";
+import { useCookie } from "react-use";
 
 import useSWR from "swr";
 
 export default function Owner() {
-	const [token] = reactUseCookie("key");
+	const [key] = useCookie("key");
 
 	const { data: profile } = useSWR(
-		{ url: `https://frontend-test-api.yoldi.agency/api/profile`, token },
+		{
+			url: `https://frontend-test-api.yoldi.agency/api/profile`,
+			token: key,
+		},
 		getProfileInfo
 	);
 

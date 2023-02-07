@@ -2,7 +2,7 @@ import { postRequest } from "@/pages/api/swr";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import useCookie from "react-use-cookie";
+import { useCookie } from "react-use";
 import useSWRMutation from "swr/mutation";
 
 import eyeSolid from "../../public/icons/input/eye-solid.svg";

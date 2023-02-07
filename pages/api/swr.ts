@@ -1,4 +1,4 @@
-import { IRegData } from "@/models/IUser";
+import { IEditUser, IRegData } from "@/models/IUser";
 
 export async function postRequest(
 	url: string,
@@ -40,6 +40,20 @@ export async function getUserInfo({
 		method: "GET",
 		headers: {
 			accept: "application/json",
+		},
+	}).then((res) => res.json());
+}
+export async function editUserInfo(
+	{ url, token }: { url: string; token: string | any },
+	{ arg }: { arg: IEditUser }
+) {
+	return fetch(url, {
+		method: "PATCH",
+		body: JSON.stringify(arg),
+		headers: {
+			accept: "application/json",
+			"Content-Type": "application/json",
+			"X-API-KEY": token,
 		},
 	}).then((res) => res.json());
 }

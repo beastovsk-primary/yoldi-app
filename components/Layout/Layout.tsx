@@ -3,11 +3,11 @@ import React, { FC, ReactNode, useEffect } from "react";
 import Footer from "../UI/Footer/Footer";
 import Header from "../UI/Header/Header";
 
-import useCookie from "react-use-cookie";
 import useSWR from "swr";
 
 import s from "./Layout.module.scss";
 import { getProfileInfo } from "@/pages/api/swr";
+import { useCookie } from "react-use";
 
 interface LayoutProps {
 	children: ReactNode;
