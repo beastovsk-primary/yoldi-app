@@ -30,7 +30,7 @@ export default function Guest() {
 
 	return (
 		<Layout>
-			<ProfileInfo user={data} />
+			<ProfileInfo user={data} owner={false} />
 		</Layout>
 	);
 }

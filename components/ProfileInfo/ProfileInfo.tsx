@@ -1,10 +1,8 @@
 import { IUser } from "@/models/IUser";
 import React, { FC, useState } from "react";
-import Image from "next/image";
 
 import { useCookie } from "react-use";
-
-import pen from "../../public/icons/button/pen.svg";
+import useMedia from "use-media";
 
 import s from "./ProfileInfo.module.scss";
 import { useRouter } from "next/navigation";
@@ -13,21 +11,33 @@ import EditProfileInfo from "../UI/EditProfileInfo/EditProfileInfo";
 
 interface ProfileInfoProps {
 	user: IUser;
+	owner: boolean;
 }
 
-const ProfileInfo: FC<ProfileInfoProps> = ({ user }) => {
+const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
+	const isMobile = useMedia({ maxWidth: "576px" }, true);
 	const router = useRouter();
 
 	const [editModal, setEditModal] = useState(false);
 
-	const [slug, updateSlug, deleteSlug] = useCookie("slug");
+	const [slug] = useCookie("slug");
 	const [key, updateKey, deleteKey] = useCookie("key");
 
 	const onSignOut = () => {
 		router.push("/login");
 		deleteKey();
 	};
+
 	if (!user) return <></>;
+
+	// If mobile device -> show component instead of modal
+	if (editModal && isMobile)
+		return (
+			<EditProfileInfo
+				setEditModal={(e) => setEditModal(e)}
+				userInfo={user}
+			/>
+		);
 
 	return (
 		<div className={s.container}>
@@ -61,7 +71,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user }) => {
 						<p className={s.description}>{user?.description}</p>
 					) : (
 						<p className={s.empty}>
-							{user?.slug == slug
+							{owner
 								? "Нет информации о себе"
 								: "Пользователь не указал информацию о себе"}
 						</p>
@@ -78,6 +88,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user }) => {
 				footer={false}
 				onCancel={() => setEditModal(false)}
 				onOk={() => setEditModal(false)}
+				className={s.modal}
 			>
 				{/* Pulling the props to setState */}
 				<EditProfileInfo

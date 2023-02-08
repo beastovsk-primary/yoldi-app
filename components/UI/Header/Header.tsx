@@ -21,7 +21,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
 	return (
 		<div className={s.container}>
 			<div className={s.wrapper}>
-				<Link href={""}>
+				<Link href={"/"}>
 					<Image src={logoImage} alt="" />
 				</Link>
 

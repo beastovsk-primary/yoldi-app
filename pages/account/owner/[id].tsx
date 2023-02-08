@@ -29,7 +29,7 @@ export default function Owner() {
 
 	return (
 		<Layout>
-			<ProfileInfo user={profile} />
+			<ProfileInfo user={profile} owner={true}/>
 		</Layout>
 	);
 }
