@@ -57,3 +57,12 @@ export async function editUserInfo(
 		},
 	}).then((res) => res.json());
 }
+
+export async function getAllUsers(url: string) {
+	return fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+		},
+	}).then((res) => res.json());
+}

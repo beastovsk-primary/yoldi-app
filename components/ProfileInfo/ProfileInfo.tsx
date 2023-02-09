@@ -50,8 +50,11 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 							className={s.image}
 							alt="photo"
 						/>
-					) : (
+					) : 
+					user.name ? (
 						user?.name[0]
+					) : (
+						""
 					)}
 				</div>
 				<div className={s.title}>

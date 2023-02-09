@@ -1,0 +1,74 @@
+@import "../../styles/mixins.scss";
+
+.container {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+
+	margin: 0 auto;
+	width: 70%;
+	box-sizing: border-box;
+
+	@media screen and (max-width: $breakpoint-md) {
+		width: 100%;
+		padding: 0px 20px;
+	}
+}
+
+.title {
+	@include fluid(margin-top, 50px, 80px);
+	@include fluid(margin-bottom, 30px, 60px);
+	@include fluid(font-size, 28px, 32px);
+	font-weight: 500;
+}
+
+.list {
+	list-style: none;
+}
+.item {
+	@include fluid(padding-top, 10px, 20px);
+	@include fluid(padding-bottom, 10px, 20px);
+	border-top: 1px solid #e6e6e6;
+	display: flex;
+	align-items: center;
+}
+
+.info {
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
+
+	@media screen and (max-width: $breakpoint-sm) {
+		flex-direction: column;
+	}
+}
+
+.email {
+	@include fluid(font-size, 16px, 18px);
+	color: #838383;
+	font-weight: 400;
+}
+
+.photo {
+	@include fluid(width, 40px, 80px);
+	@include fluid(height, 40px, 80px);
+	@include fluid(font-size, 16px, 18px);
+	@include fluid(margin-right, 15px, 20px);
+
+	background: $basic-grey;
+	color: $basic-black;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px;
+	border: 1px solid #e6e6e6;
+}
+.image {
+	@include fluid(width, 40px, 80px);
+	@include fluid(height, 40px, 80px);
+	object-fit: cover;
+	object-position: right top;
+	border-radius: 50px;
+}
