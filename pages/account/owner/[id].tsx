@@ -15,6 +15,10 @@ export default function Owner() {
 
 	const queryId = searchParams.get("id");
 
+	if (!key) {
+		router.push(`/login`);
+	}
+
 	if (queryId != slug) {
 		router.push(`/account/owner/${slug}`);
 	}
@@ -29,7 +33,7 @@ export default function Owner() {
 
 	return (
 		<Layout>
-			<ProfileInfo user={profile} owner={true}/>
+			<ProfileInfo user={profile} owner={true} />
 		</Layout>
 	);
 }

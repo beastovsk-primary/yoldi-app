@@ -49,7 +49,7 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 		});
 
 		updateKey(auth.value);
-		router.push(`/account/owner/1`);
+		router.push(`/`);
 	};
 
 	useEffect(() => {

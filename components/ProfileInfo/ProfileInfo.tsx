@@ -50,8 +50,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 							className={s.image}
 							alt="photo"
 						/>
-					) : 
-					user.name ? (
+					) : user.name ? (
 						user?.name[0]
 					) : (
 						""
@@ -62,12 +61,14 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 						<h2 className={s.name}>{user?.name}</h2>
 						<p className={s.mail}>{user?.email}</p>
 					</div>
-					<button
-						className={s.edit}
-						onClick={() => setEditModal(true)}
-					>
-						Редактировать
-					</button>
+					{owner ? (
+						<button
+							className={s.edit}
+							onClick={() => setEditModal(true)}
+						>
+							Редактировать
+						</button>
+					) : null}
 				</div>
 				<div className={s.body}>
 					{user?.description ? (
@@ -80,9 +81,14 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 						</p>
 					)}
 
-					<button className={s.signout} onClick={() => onSignOut()}>
-						Выйти
-					</button>
+					{owner ? (
+						<button
+							className={s.signout}
+							onClick={() => onSignOut()}
+						>
+							Выйти
+						</button>
+					) : null}
 				</div>
 			</div>
 

@@ -9,8 +9,6 @@ const inter = Inter({
 	variable: "--font-inter",
 });
 
-console.log(inter.className);
-
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<ConfigProvider>

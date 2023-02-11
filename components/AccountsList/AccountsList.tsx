@@ -9,7 +9,7 @@ interface AccountsListProps {
 }
 
 const AccountsList: FC<AccountsListProps> = ({ usersList }) => {
-	console.log(usersList);
+
 	return (
 		<div className={s.container}>
 			<h2 className={s.title}>Список аккаунтов</h2>
