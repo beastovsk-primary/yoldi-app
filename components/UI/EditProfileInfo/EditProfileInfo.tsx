@@ -5,6 +5,7 @@ import useSWRMutation from "swr/mutation";
 import { editUserInfo } from "@/pages/api/swr";
 import { useCookie } from "react-use";
 import { useRouter } from "next/router";
+import { customNotification } from "@/utils/notification";
 
 interface EditProfileInfoProps {
 	setEditModal: (arg0: boolean) => void;
@@ -41,6 +42,7 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 		};
 		trigger(data);
 
+		customNotification("success", "top", "Успешно", "");
 		updateSlugCookie(slug);
 
 		setEditModal(false);

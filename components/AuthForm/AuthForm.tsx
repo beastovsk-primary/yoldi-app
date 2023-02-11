@@ -1,4 +1,5 @@
 import { postRequest } from "@/pages/api/swr";
+import { customNotification } from "@/utils/notification";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
@@ -48,8 +49,18 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 			password,
 		});
 
-		updateKey(auth.value);
-		router.push(`/`);
+		if (auth.value) {
+			customNotification("success", "top", "Успешно", "");
+			updateKey(auth.value);
+			return router.push(`/`);
+		}
+
+		return customNotification(
+			"error",
+			"top",
+			"Произошла ошибка",
+			auth.message
+		);
 	};
 
 	useEffect(() => {

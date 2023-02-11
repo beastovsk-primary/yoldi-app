@@ -128,3 +128,33 @@
 .modal {
 	height: 100vh;
 }
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+.modalTitle {
+	@include fluid(font-size, 18px, 24px);
+}
+.button {
+	@include fluid(margin-top, 20px, 30px);
+	@include fluid(font-size, 16px, 22px);
+	color: $basic-black;
+
+	border: 1px solid $background-grey;
+	border-radius: 5px;
+	padding: 7px 10px;
+	cursor: pointer;
+	background: $basic-white;
+
+	&:hover {
+		border: 1px solid $hover-grey;
+		transition: $trn;
+	}
+	@media screen and (max-width: $breakpoint-md) {
+		margin-top: 10px;
+	}
+
+	&:last-child {
+		margin-left: 10px;
+	}
+}

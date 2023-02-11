@@ -1,4 +1,5 @@
 import { postRequest } from "@/pages/api/swr";
+import { customNotification } from "@/utils/notification";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { FC, ReactNode, useEffect, useState } from "react";
@@ -47,8 +48,18 @@ const RegForm: FC<RegFormProps> = (props) => {
 	const onFinish = async () => {
 		const reg = await trigger({ name, email, password });
 
-		updateToken(reg.value);
-		router.push(`/`);
+		if (reg.value) {
+			customNotification("success", "top", "Успешно", "");
+			updateToken(reg.value);
+			return router.push(`/`);
+		}
+
+		return customNotification(
+			"error",
+			"top",
+			"Произошла ошибка",
+			reg.message
+		);
 	};
 
 	useEffect(() => {

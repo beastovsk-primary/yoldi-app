@@ -19,11 +19,13 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 	const router = useRouter();
 
 	const [editModal, setEditModal] = useState(false);
+	const [logoutModal, setLogoutModal] = useState(false);
 
 	const [slug] = useCookie("slug");
 	const [key, updateKey, deleteKey] = useCookie("key");
 
 	const onSignOut = () => {
+		setLogoutModal(false);
 		router.push("/login");
 		deleteKey();
 	};
@@ -84,7 +86,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 					{owner ? (
 						<button
 							className={s.signout}
-							onClick={() => onSignOut()}
+							onClick={() => setLogoutModal(true)}
 						>
 							Выйти
 						</button>
@@ -104,6 +106,27 @@ const ProfileInfo: FC<ProfileInfoProps> = ({ user, owner }) => {
 					setEditModal={(e) => setEditModal(e)}
 					userInfo={user}
 				/>
+			</Modal>
+
+			<Modal
+				open={logoutModal}
+				footer={false}
+				onCancel={() => setLogoutModal(false)}
+				onOk={() => setLogoutModal(false)}
+				className={s.modal}
+			>
+				<div className={s.modalTitle}>Вы хотите выйти?</div>
+				<div className={s.buttons}>
+					<button
+						className={s.button}
+						onClick={() => setLogoutModal(false)}
+					>
+						Отмена
+					</button>
+					<button className={s.button} onClick={() => onSignOut()}>
+						Выйти
+					</button>
+				</div>
 			</Modal>
 		</div>
 	);
