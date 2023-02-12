@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { getAllUsers } from "./api/swr";
 
-export default function Auth() {
+export default function List() {
 	const [usersList, setUsersList] = useState([]);
 
 	const { data } = useSWR(

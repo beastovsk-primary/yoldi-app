@@ -49,17 +49,18 @@ const RegForm: FC<RegFormProps> = (props) => {
 		const reg = await trigger({ name, email, password });
 
 		if (reg.value) {
-			customNotification("success", "top", "Успешно", "");
+			// customNotification("success", "top", "Успешно", "");
 			updateToken(reg.value);
 			return router.push(`/`);
 		}
 
-		return customNotification(
-			"error",
-			"top",
-			"Произошла ошибка",
-			reg.message
-		);
+		return;
+		//  customNotification(
+		// 	"error",
+		// 	"top",
+		// 	"Произошла ошибка",
+		// 	reg.message
+		// );
 	};
 
 	useEffect(() => {

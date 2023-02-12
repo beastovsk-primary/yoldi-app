@@ -33,6 +33,8 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 	);
 
 	const onEdit = async () => {
+		if (!name || !slug) return setEditModal(false);
+		
 		const data = {
 			name,
 			imageId: null,
@@ -42,7 +44,7 @@ const EditProfileInfo: FC<EditProfileInfoProps> = ({
 		};
 		trigger(data);
 
-		customNotification("success", "top", "Успешно", "");
+		// customNotification("success", "top", "Успешно", "");
 		updateSlugCookie(slug);
 
 		setEditModal(false);

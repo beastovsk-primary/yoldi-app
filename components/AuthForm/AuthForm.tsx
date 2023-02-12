@@ -50,17 +50,18 @@ const AuthForm: FC<AuthFormProps> = (props) => {
 		});
 
 		if (auth.value) {
-			customNotification("success", "top", "Успешно", "");
+			// customNotification("success", "top", "Успешно", "");
 			updateKey(auth.value);
 			return router.push(`/`);
 		}
 
-		return customNotification(
-			"error",
-			"top",
-			"Произошла ошибка",
-			auth.message
-		);
+		return 
+		// customNotification(
+		// 	"error",
+		// 	"top",
+		// 	"Произошла ошибка",
+		// 	auth.message
+		// );
 	};
 
 	useEffect(() => {
