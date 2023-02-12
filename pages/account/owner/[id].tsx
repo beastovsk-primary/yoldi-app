@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Owner() {
 	const router = useRouter();
@@ -15,13 +16,15 @@ export default function Owner() {
 
 	const queryId = searchParams.get("id");
 
-	if (!key) {
-		router.push(`/login`);
-	}
+	useEffect(() => {
+		if (!key) {
+			router.push(`/login`);
+		}
 
-	if (queryId != slug) {
-		router.push(`/account/owner/${slug}`);
-	}
+		if (queryId != slug) {
+			router.push(`/account/owner/${slug}`);
+		}
+	}, [key, slug]);
 
 	const { data: profile } = useSWR(
 		{
